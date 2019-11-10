@@ -1,1 +1,1 @@
-typeSearchIndex = [{"p":"com.mcsunnyside.portforwardcraft","l":"ConnectionContainer"},{"p":"com.mcsunnyside.portforwardcraft","l":"HostContainer"},{"p":"com.mcsunnyside.portforwardcraft","l":"Main"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.mcsunnyside.portforwardcraft","l":"ConnectionContainer"},{"p":"com.mcsunnyside.portforwardcraft","l":"HostContainer"},{"p":"com.mcsunnyside.portforwardcraft","l":"Main"}]

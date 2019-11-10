@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"com.mcsunnyside.portforwardcraft"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.mcsunnyside.portforwardcraft"}]
