@@ -1,1 +1,1 @@
-/usr/local/lib/jvm/openjdk11/bin/javadoc @options @packages
+/home/travis/oraclejdk11/bin/javadoc @options @packages
