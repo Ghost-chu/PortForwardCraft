@@ -1,0 +1,40 @@
+language: java
+jdk:
+- openjdk8
+install: false
+script:
+- export PROJECT_NAME=PortForwardCraft
+- git clone https://$Github_token@github.com/Ghost-chu/$PROJECT_NAME.git
+- cd $PROJECT_NAME
+- mvn clean
+- mvn -T 4 install
+after_success:
+- rm -rf push
+- mkdir push
+- cp ./target/*.jar ./push/
+- rm -f ./target/original-*.jar
+- git clone https://$Github_token@github.com/Ghost-chu/$PROJECT_NAME.git
+- mkdir -p ./BinaryRepository/$PROJECT_NAME/$TRAVIS_BUILD_NUMBER
+- mkdir -p ./BinaryRepository/$PROJECT_NAME/$TRAVIS_BUILD_NUMBER/target
+- cp ./target/* ./BinaryRepository/$PROJECT_NAME/$TRAVIS_BUILD_NUMBER/target
+- echo -e "== Built by Travis-CI ==\nBuild Number [$TRAVIS_BUILD_NUMBER]\nBuild Type
+  [$TRAVIS_EVENT_TYPE]\nTag [$TRAVIS_TAG]\nCommit [$TRAVIS_COMMIT] - [$TRAVIS_COMMIT_MESSAGE]"
+  > ./BinaryRepository/$PROJECT_NAME/$TRAVIS_BUILD_NUMBER/BUILDINFO
+- cd BinaryRepository
+- git add .
+- git commit -m "Auto update by Bot"
+- git push --force
+- cd ..
+- echo "done"
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: IT9BXQ7Mrj3szSOJ9B2Vg3iiDnlg0Io0lqOlFStg4Xp8pgju68YEJqiqA/Jdxt7Y+O+ojNgRXbXCxQFir2By7Xcsf46JNeWWphRmwa2rF8rLdL4z77HibBS6TT9TZxei6D05gHzbEfBQFPQ79sMI7Gymi+qYqAvznoRCncZBRgdPjBmVeX04gSMoUkTDqauIChd7HfWLcZ2arwA2/PH+RUqXobIpvMLoaoifCuU/FYvlur64x36W6UWe2DFyh3zU3uonB/alyaHYzfbIEA+bhNhhuMw2KRLkDmDdSmbq+IwAb/TQbIaICQzxlA1oqYvBJ49t8vanRmkjfaC2fcWKGMcOjWVra5ygGDneceVi4VUjm7n/ImHd+C0RC4gUl+Ao0scJtl5GYAe/vFwDkDfv+7VAnqaEPwX9LrpId/J60iNAjcZGc4eFekwxklMS5V7qB8DzUleOHhXRqGhU20rpQJ3PcWVZIkooDmJxjf+hJiA1mUdg2oaHNAVGgVJZ5F6sHFMoKqOge9i9SFzYtyVBdaNyd4v6OcSwa3yl0KKmT1JibVwH7LhDRzHkJ1NInEHOsaZwggOhCP6wa2pmXMFjwP2iA8D5pmVWOodLv/nH5FBiF0JT3u+kpk0XR64FFjITL59eTsoZhwxAwSBlHMwjHicvjjj5iCQLjZxiYTpOxSs=
+  file:
+    - ./push/*
+  file_glob: true
+  on:
+    repo: Ghost-chu/$PROJECT_NAME
+    tags: true
+  overwrite: true
