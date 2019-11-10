@@ -1,0 +1,7 @@
+name: PortForwardCraft
+main: com.mcsunnyside.portforwardcraft.Main
+version: 0.0.1-SNAPSHOT
+commands:
+  pfc:
+    description: pfc
+    usage: /<command> to reconnect ssh server
